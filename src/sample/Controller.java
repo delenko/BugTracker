@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -19,8 +16,6 @@ import java.util.ResourceBundle;
 
 
 public class Controller{
-    @FXML
-    private BorderPane bp;
     @FXML
     private GridPane gp;
 
@@ -35,17 +30,33 @@ public class Controller{
         TextField nameField = new TextField();
         TextField dateField = new TextField();
         Button submit = new Button("Submit");
+        ComboBox<String> statuses = new ComboBox<>();
+        statuses.getItems().addAll("Development","Test","QA","Release");
+        DatePicker datePicker = new DatePicker();
+        gp.add(datePicker,1,1);
         gp.add(bugName,0,0);
         gp.add(bugDate,0,1);
         gp.add(bugStatus,0,2);
         gp.add(explain,0,3);
         gp.add(nameField,1,0);
-        gp.add(dateField,1,1);
         gp.add(submit,1,4);
+        gp.add(statuses,1,2);
         gp.setHalignment(submit, HPos.CENTER);
         gp.add(ta,1,3);
         System.out.println("Hey");
 
+        submit.setOnAction((e)-> {
+
+           System.out.println(nameField.getText()+ta.getText());
+        });
+        };
+
+
+
+    private void moveData(ActionEvent event) {
+    }
+
+    public void moveData(String name, String date, String status, String explain){
 
     }
 }
