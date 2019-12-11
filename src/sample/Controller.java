@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 
 import javax.xml.soap.Text;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
@@ -46,8 +47,18 @@ public class Controller{
         System.out.println("Hey");
 
         submit.setOnAction((e)-> {
-
-           System.out.println(nameField.getText()+ta.getText());
+            try{
+           Database db = new Database();
+            String name = nameField.getText();
+           LocalDate dates = datePicker.getValue();
+           String date = dates.toString();
+           String status = statuses.getValue().toString();
+           String explanation = ta.getText();
+           System.out.println(name+" "+date+" "+status+" "+explanation);
+           db.startDatabase(name, date, status, explanation);
+            }catch(NullPointerException ex){
+                ex.printStackTrace();
+            }
         });
         };
 
