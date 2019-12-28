@@ -5,7 +5,7 @@
 
 <BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 <left>
-    <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0" scaleShape="false" BorderPane.alignment="CENTER">
+    <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0" scaleShape="false" BorderPane.alignment="CENTER">
         <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClick" snapToPixel="false" text="+" textAlignment="CENTER" />
     </VBox>
 </left>
