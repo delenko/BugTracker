@@ -25,6 +25,8 @@ public class Controller{
     public Controller(){
 
     }
+    private List<Button> buttons = new ArrayList<>();
+
     @FXML
     private GridPane gp;
     @FXML
@@ -32,26 +34,24 @@ public class Controller{
     @FXML
     private Button add;
 
+
     @FXML
     public void createButtons(List<String>buttonNames ){
-        leftBP.setSpacing(2.0);
-        leftBP.getChildren().removeAll();
-        List<Button> buttons = new ArrayList<>();
-        for(String buttonName : buttonNames) {
-            for(int j =0;j<buttons.size();j++){
-                if(!buttons.get(j).getText().equals(buttonName)){
-                    buttons.add(new Button(buttonName));
-                    leftBP.getChildren().add(buttons.get(j));
+        leftBP.getChildren().removeAll(buttons);
+        if((buttonNames.size()-1)==buttons.size()){
+                for (int i = 0;i<buttons.size();i++)
+                if(!buttons.get(i).getText().contains(buttonNames)) {
+                    buttons.add(new Button(buttonNames.get()));
                 }
+        }else if(buttonNames.size()!=buttons.size()){
+            for (String buttonName : buttonNames) {
+                buttons.add(new Button(buttonName));
             }
-            //buttons.add(new Button(buttonName));
         }
-       /* for(int i = 0;i<buttons.size();i++){
-            if(buttons.get(i)==null){
-                leftBP.getChildren().add(buttons.get(i));
-            }
-
-        }*/
+        for(Button butts : buttons){
+            System.out.println(butts.getText());
+            leftBP.getChildren().add(butts);
+        }
     }
 
 
@@ -75,7 +75,7 @@ public class Controller{
         gp.add(nameField,1,0);
         gp.add(submit,1,4);
         gp.add(statuses,1,2);
-        gp.setHalignment(submit, HPos.CENTER);
+        GridPane.setHalignment(submit, HPos.CENTER);
         gp.add(ta,1,3);
         System.out.println("Hey");
 
@@ -85,13 +85,14 @@ public class Controller{
             String name = nameField.getText();
            LocalDate dates = datePicker.getValue();
            String date = dates.toString();
-           String status = statuses.getValue().toString();
+           String status = statuses.getValue();
            String explanation = ta.getText();
            System.out.println(name+" "+date+" "+status+" "+explanation);
            int start = db.startDatabase(name, date, status, explanation);
            Alert errors1 = new Alert(Alert.AlertType.ERROR,"You have entered this name before. Please change name!");
 
             if(start ==0){
+
                 createButtons(db.storeDBNames());
             }
             else if(start ==1 ) {
@@ -101,7 +102,7 @@ public class Controller{
                 ex.printStackTrace();
             }
         });
-        };
+        }
 
 
 }
