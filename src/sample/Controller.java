@@ -38,10 +38,14 @@ public class Controller{
     @FXML
     public void createButtons(List<String>buttonNames ){
         leftBP.getChildren().removeAll(buttons);
+        List<String>buttonsList = new ArrayList<>();
+        for(int j = 0;j<buttons.size();j++){
+            buttonsList.add(buttons.get(j).getText());
+        }
         if((buttonNames.size()-1)==buttons.size()){
                 for (int i = 0;i<buttons.size();i++)
-                if(!buttons.get(i).getText().contains(buttonNames)) {
-                    buttons.add(new Button(buttonNames.get()));
+                if(!buttonsList.contains(buttonNames.get(i))) {
+                    buttons.add(new Button(buttonNames.get(i)));
                 }
         }else if(buttonNames.size()!=buttons.size()){
             for (String buttonName : buttonNames) {
@@ -49,7 +53,6 @@ public class Controller{
             }
         }
         for(Button butts : buttons){
-            System.out.println(butts.getText());
             leftBP.getChildren().add(butts);
         }
     }
@@ -77,7 +80,7 @@ public class Controller{
         gp.add(statuses,1,2);
         GridPane.setHalignment(submit, HPos.CENTER);
         gp.add(ta,1,3);
-        System.out.println("Hey");
+
 
         submit.setOnAction((e)-> {
             try{
@@ -87,7 +90,6 @@ public class Controller{
            String date = dates.toString();
            String status = statuses.getValue();
            String explanation = ta.getText();
-           System.out.println(name+" "+date+" "+status+" "+explanation);
            int start = db.startDatabase(name, date, status, explanation);
            Alert errors1 = new Alert(Alert.AlertType.ERROR,"You have entered this name before. Please change name!");
 

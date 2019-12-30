@@ -13,7 +13,7 @@ public class Database {
     public Connection openDatabase() throws SQLException {
         String url = "jdbc:mysql://localhost:3306";
         String user = "root";
-        String password = "Blakes12!@";
+        String password = "1qaz!QAZ";
         Connection conn = DriverManager.getConnection(url,user,password);
         return conn;
     }
