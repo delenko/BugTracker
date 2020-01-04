@@ -2,17 +2,24 @@ package sample;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import javax.xml.soap.Text;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,6 +41,42 @@ public class Controller{
     @FXML
     private Button add;
 
+    EventHandler<MouseEvent> eventHandler = event -> {
+        gp.getChildren().removeAll();
+        FXMLLoader loader = new FXMLLoader();
+        Database db = new Database();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("BugDisplay.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Label bugName = new Label("Name:");
+        Label bugDate= new Label("Date:");
+        Label bugStatus = new Label("Status:");
+        Label explain = new Label("Explanation:");
+        Label dateRetrieved = new Label(db.getDate(((Button)event.getSource()).getText()));
+        Label name = new Label(((Button)event.getSource()).getText());
+        Label status = new Label(db.getStatus(((Button)event.getSource()).getText()));
+        Label explanation = new Label(db.getExplanation(((Button)event.getSource()).getText()));
+        List<Label> pageInfo = new ArrayList<>();
+        pageInfo.add(dateRetrieved);
+        pageInfo.add(name);
+        pageInfo.add(status);
+        pageInfo.add(explanation);
+        for (Label label : pageInfo) {
+            gp.getChildren().remove(name);
+        }
+
+        gp.add(bugName,0,0);
+        gp.add(bugDate,0,1);
+        gp.add(bugStatus,0,2);
+        gp.add(explain,0,3);
+        gp.add(name,1,0);
+        gp.add(dateRetrieved,1,1);
+        gp.add(status,1,2);
+        gp.add(explanation,1,3);
+    };
+
 
     @FXML
     public void createButtons(List<String>buttonNames ){
@@ -48,8 +91,9 @@ public class Controller{
                     buttons.add(new Button(buttonNames.get(i)));
                 }
         }else if(buttonNames.size()!=buttons.size()){
-            for (String buttonName : buttonNames) {
-                buttons.add(new Button(buttonName));
+            for (int i = 0;i<buttonNames.size();i++) {
+                buttons.add(new Button(buttonNames.get(i)));
+                buttons.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,eventHandler);
             }
         }
         for(Button butts : buttons){
@@ -61,10 +105,10 @@ public class Controller{
     @FXML
     private void buttonClick(ActionEvent event) {
         TextArea ta = new TextArea();
-        Label bugName = new Label("Name");
-        Label bugDate= new Label("Date");
-        Label bugStatus = new Label("Status");
-        Label explain = new Label("Explanation");
+        Label bugName = new Label("Name:");
+        Label bugDate= new Label("Date:");
+        Label bugStatus = new Label("Status:");
+        Label explain = new Label("Explanation:");
         TextField nameField = new TextField();
         Button submit = new Button("Submit");
         ComboBox<String> statuses = new ComboBox<>();
@@ -107,4 +151,8 @@ public class Controller{
         }
 
 
+    public void showAll(ActionEvent actionEvent) {
+        Database dbs = new Database();
+        createButtons(dbs.storeDBNames());
+    }
 }

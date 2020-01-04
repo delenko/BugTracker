@@ -5,14 +5,14 @@
 
 <BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 <left>
-    <ScrollPane fx:id="scrollp" prefHeight="460.0" prefWidth="100.0" >
-    <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0"  BorderPane.alignment="CENTER" />
+    <ScrollPane fx:id="scrollp" prefHeight="460.0" prefWidth="100.0">
+    <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
     </ScrollPane>
 </left>
    <right>
        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-           <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClick" snapToPixel="false"
-                   text="+" textAlignment="CENTER"/>
+           <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClick" snapToPixel="false" text="+" textAlignment="CENTER" />
+           <Button fx:id="showAll" alignment="CENTER" mnemonicParsing="false" onAction="#showAll" snapToPixel="false" text="Show All" textAlignment="CENTER" />
        </VBox>
    </right>
    <top>
@@ -21,8 +21,8 @@
    <center>
       <GridPane fx:id="gp">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="104.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="481.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="171.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="414.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />

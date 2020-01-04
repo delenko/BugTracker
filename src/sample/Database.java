@@ -3,6 +3,7 @@ package sample;
 
 import javafx.scene.control.Button;
 
+import javax.swing.plaf.nimbus.State;
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,6 +17,48 @@ public class Database {
         String password = "1qaz!QAZ";
         Connection conn = DriverManager.getConnection(url,user,password);
         return conn;
+    }
+
+    public String getDate(String buttonName){
+        String date = "";
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String dateRetrieve = "Select date from bugs.bugs where name='"+buttonName+"'";
+            ResultSet rs = stmt.executeQuery(dateRetrieve);
+            while(rs.next()){ date = rs.getString("date");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+    public String getStatus(String buttonName){
+        String status = "";
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String statusRetrieve = "Select status from bugs.bugs where name='"+buttonName+"'";
+            ResultSet rs = stmt.executeQuery(statusRetrieve);
+            while(rs.next()){
+                status = rs.getString("status");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return status;
+    }
+    public String getExplanation (String buttonName){
+        String explanation = "";
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String explnRetrieve = "Select explanation from bugs.bugs where name ='"+buttonName+"'";
+            ResultSet rs = stmt.executeQuery(explnRetrieve);
+            while(rs.next()){
+                explanation = rs.getString("explanation");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return explanation;
     }
 
 
