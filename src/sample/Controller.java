@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -72,6 +73,7 @@ public class Controller{
         gp.add(bugStatus,0,2);
         gp.add(explain,0,3);
         gp.add(name,1,0);
+        explanation.setAlignment(Pos.TOP_LEFT);
         gp.add(dateRetrieved,1,1);
         gp.add(status,1,2);
         gp.add(explanation,1,3);
