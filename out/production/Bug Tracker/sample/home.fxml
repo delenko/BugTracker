@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane fx:id="bp" centerShape="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="785.0" scaleShape="false" snapToPixel="false" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 <left>
     <ScrollPane fx:id="scrollp" prefHeight="460.0" prefWidth="100.0">
     <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
@@ -16,10 +16,10 @@
        </VBox>
    </right>
    <top>
-      <HBox prefHeight="28.0" prefWidth="785.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="37.0" prefWidth="803.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <GridPane fx:id="gp">
+      <GridPane fx:id="gp" prefHeight="616.0" prefWidth="585.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="171.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="414.0" />

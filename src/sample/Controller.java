@@ -14,10 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import javax.xml.soap.Text;
 import java.io.IOException;
@@ -39,50 +36,49 @@ public class Controller{
     private GridPane gp;
     @FXML
     private VBox leftBP;
-    @FXML
-    private Button add;
+
 
     EventHandler<MouseEvent> eventHandler = event -> {
-        gp.getChildren().removeAll();
-        FXMLLoader loader = new FXMLLoader();
+        gp.getChildren().clear();
         Database db = new Database();
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("BugDisplay.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Label bugName = new Label("Name:");
-        Label bugDate= new Label("Date:");
-        Label bugStatus = new Label("Status:");
-        Label explain = new Label("Explanation:");
         Label dateRetrieved = new Label(db.getDate(((Button)event.getSource()).getText()));
         Label name = new Label(((Button)event.getSource()).getText());
         Label status = new Label(db.getStatus(((Button)event.getSource()).getText()));
         Label explanation = new Label(db.getExplanation(((Button)event.getSource()).getText()));
-        List<Label> pageInfo = new ArrayList<>();
-        pageInfo.add(dateRetrieved);
-        pageInfo.add(name);
-        pageInfo.add(status);
-        pageInfo.add(explanation);
-        for (Label label : pageInfo) {
-            gp.getChildren().remove(name);
-        }
-
-        gp.add(bugName,0,0);
-        gp.add(bugDate,0,1);
-        gp.add(bugStatus,0,2);
-        gp.add(explain,0,3);
-        gp.add(name,1,0);
         explanation.setAlignment(Pos.TOP_LEFT);
+        Label nameCat = new Label("Name:");
+        Label dateCat = new Label("Date:");
+        Label statusCat = new Label("Status:");
+        Label expCat = new Label("Explanation:");
+        expCat.setAlignment(Pos.TOP_LEFT);
+        Button delete = new Button("Delete");
+        Button update = new Button("Update");
+        VBox vboxLeft = new VBox(10);
+        VBox vboxRight = new VBox(10);
+        vboxLeft.setAlignment(Pos.CENTER_LEFT);
+        vboxLeft.getChildren().add(delete);
+        vboxRight.setAlignment(Pos.CENTER_RIGHT);
+        vboxRight.getChildren().add(update);
+        gp.setAlignment(Pos.TOP_LEFT);
+        gp.add(nameCat,0,0);
+        gp.add(dateCat,0,1);
+        gp.add(statusCat,0,2);
+        gp.add(expCat,0,3);
+        gp.add(name,1,0);
+        gp.add(vboxLeft,1,4);
+        gp.add(vboxRight,1,4);
         gp.add(dateRetrieved,1,1);
         gp.add(status,1,2);
         gp.add(explanation,1,3);
+        
+
+
     };
 
 
     @FXML
     public void createButtons(List<String>buttonNames ){
-        leftBP.getChildren().removeAll(buttons);
+        leftBP.getChildren().clear();
         List<String>buttonsList = new ArrayList<>();
         for(int j = 0;j<buttons.size();j++){
             buttonsList.add(buttons.get(j).getText());
