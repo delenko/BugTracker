@@ -13,7 +13,7 @@ public class Main extends Application {
         Controller controller = new Controller();
         FXMLLoader fxml = new FXMLLoader();
         fxml.setController(controller);
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
 
         primaryStage.setTitle("Bug Tracker");
         primaryStage.setScene(new Scene(root, 800, 600));
