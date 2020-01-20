@@ -1,9 +1,9 @@
 package sample;
 
 
+
 import javafx.scene.control.Button;
 
-import javax.swing.plaf.nimbus.State;
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +17,15 @@ public class Database {
         String password = "Blakes12!@";
         Connection conn = DriverManager.getConnection(url,user,password);
         return conn;
+    }
+    public void delete(String name){
+        try{
+            Statement statement = openDatabase().createStatement();
+            String nameRetrieve = "Delete from bugs.bugs where name ='"+name+"'";
+            statement.executeUpdate(nameRetrieve);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getDate(String buttonName){

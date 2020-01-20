@@ -53,24 +53,26 @@ public class Controller{
         expCat.setAlignment(Pos.TOP_LEFT);
         Button delete = new Button("Delete");
         Button update = new Button("Update");
-        VBox vboxLeft = new VBox(10);
-        VBox vboxRight = new VBox(10);
-        vboxLeft.setAlignment(Pos.CENTER_LEFT);
-        vboxLeft.getChildren().add(delete);
-        vboxRight.setAlignment(Pos.CENTER_RIGHT);
-        vboxRight.getChildren().add(update);
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER_LEFT);
+        hbox.getChildren().add(delete);
+        hbox.setAlignment(Pos.CENTER_RIGHT);
+        hbox.getChildren().add(update);
         gp.setAlignment(Pos.TOP_LEFT);
         gp.add(nameCat,0,0);
         gp.add(dateCat,0,1);
         gp.add(statusCat,0,2);
         gp.add(expCat,0,3);
         gp.add(name,1,0);
-        gp.add(vboxLeft,1,4);
-        gp.add(vboxRight,1,4);
+        gp.add(hbox,1,4);
         gp.add(dateRetrieved,1,1);
         gp.add(status,1,2);
         gp.add(explanation,1,3);
-        
+        delete.setOnAction(event1 -> {
+            gp.getChildren().removeAll(dateRetrieved,name,status,explanation);
+            db.delete(((Button)event.getSource()).getText());
+            createButtons(db.storeDBNames());
+        });
 
 
     };
