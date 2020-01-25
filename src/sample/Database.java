@@ -14,14 +14,14 @@ public class Database {
     public Connection openDatabase() throws SQLException {
         String url = "jdbc:mysql://localhost:3306";
         String user = "root";
-        String password = "Blakes12!@";
+        String password = "1qaz!QAZ";
         Connection conn = DriverManager.getConnection(url,user,password);
         return conn;
     }
     public void delete(String name){
         try{
             Statement statement = openDatabase().createStatement();
-            String nameRetrieve = "Delete from bugs.bugs where name ='"+name+"'";
+            String nameRetrieve = "Delete from bugs.bugs where bugId in (Select * from (Select bugId from bugs.bugs where name = '"+name+"') AS T);";
             statement.executeUpdate(nameRetrieve);
         } catch (SQLException e) {
             e.printStackTrace();

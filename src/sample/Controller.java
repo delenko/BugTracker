@@ -50,10 +50,18 @@ public class Controller{
         Label dateCat = new Label("Date:");
         Label statusCat = new Label("Status:");
         Label expCat = new Label("Explanation:");
+        Button nameButton = new Button("Modify");
+        Button statusButton = new Button("Modify");
+        Button dateButton = new Button("Modify");
+        Button explanationButton = new Button("Modify");
         expCat.setAlignment(Pos.TOP_LEFT);
         Button delete = new Button("Delete");
         Button update = new Button("Update");
         HBox hbox = new HBox();
+        HBox hboxName = new HBox(10,name,nameButton);
+        HBox hBoxStatus = new HBox(10,dateRetrieved,dateButton);
+        HBox hBoxDate = new HBox(10,status,statusButton);
+        HBox hBoxExplanation = new HBox(10,explanation,explanationButton);
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.getChildren().add(delete);
         hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -63,19 +71,41 @@ public class Controller{
         gp.add(dateCat,0,1);
         gp.add(statusCat,0,2);
         gp.add(expCat,0,3);
-        gp.add(name,1,0);
+       // gp.add(name,1,0);
+        //gp.add(dateRetrieved,1,1);
+        //gp.add(status,1,2);
+        //gp.add(explanation,1,3);
+        gp.add(hboxName,1,0);
+        gp.add(hBoxDate,1,1);
+        gp.add(hBoxStatus,1,2);
+        gp.add(hBoxExplanation,1,3);
         gp.add(hbox,1,4);
-        gp.add(dateRetrieved,1,1);
-        gp.add(status,1,2);
-        gp.add(explanation,1,3);
         delete.setOnAction(event1 -> {
             gp.getChildren().removeAll(dateRetrieved,name,status,explanation);
             db.delete(((Button)event.getSource()).getText());
-            createButtons(db.storeDBNames());
+            leftBP.getChildren().remove((Button)event.getSource());
+            createNewButtons(db.storeDBNames());
+
         });
-
-
+        
     };
+
+    public void createNewButtons(List<String>buttonName){
+        leftBP.getChildren().clear();
+
+        if(buttons.size()==buttonName.size()){
+           ;return;
+        }
+
+        else if(buttons.size()-1==buttonName.size()){
+            buttons.clear();
+            for(int i =0;i<buttonName.size();i++){
+                buttons.add(new Button(buttonName.get(i)));
+                buttons.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,eventHandler);
+                leftBP.getChildren().add(buttons.get(i));
+            }
+        }
+    }
 
 
     @FXML
@@ -104,6 +134,7 @@ public class Controller{
 
     @FXML
     private void buttonClick(ActionEvent event) {
+        gp.getChildren().clear();
         TextArea ta = new TextArea();
         Label bugName = new Label("Name:");
         Label bugDate= new Label("Date:");
@@ -124,8 +155,6 @@ public class Controller{
         gp.add(statuses,1,2);
         GridPane.setHalignment(submit, HPos.CENTER);
         gp.add(ta,1,3);
-
-
         submit.setOnAction((e)-> {
             try{
            Database db = new Database();
