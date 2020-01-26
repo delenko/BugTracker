@@ -61,7 +61,7 @@ public class Controller{
         HBox hboxName = new HBox(10,name,nameButton);
         HBox hBoxStatus = new HBox(10,dateRetrieved,dateButton);
         HBox hBoxDate = new HBox(10,status,statusButton);
-        HBox hBoxExplanation = new HBox(10,explanation,explanationButton);
+        HBox hBoxExplanation = new HBox(5,explanation,explanationButton);
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.getChildren().add(delete);
         hbox.setAlignment(Pos.CENTER_RIGHT);
@@ -71,23 +71,47 @@ public class Controller{
         gp.add(dateCat,0,1);
         gp.add(statusCat,0,2);
         gp.add(expCat,0,3);
-       // gp.add(name,1,0);
-        //gp.add(dateRetrieved,1,1);
-        //gp.add(status,1,2);
-        //gp.add(explanation,1,3);
         gp.add(hboxName,1,0);
         gp.add(hBoxDate,1,1);
         gp.add(hBoxStatus,1,2);
         gp.add(hBoxExplanation,1,3);
         gp.add(hbox,1,4);
+        nameButton.setOnAction(event2->{
+            hboxName.getChildren().clear();
+            TextField tf = new TextField("Modify name text");
+            hboxName.getChildren().add(tf);
+        });
+        statusButton.setOnAction(event3->{
+            hBoxDate.getChildren().clear();
+            DatePicker datePicker = new DatePicker();
+            hBoxDate.getChildren().add(datePicker);
+        });
+        dateButton.setOnAction(event4->{
+            hBoxStatus.getChildren().clear();
+            ComboBox<String> statuses = new ComboBox<>();
+            statuses.getItems().addAll("Development","Test","QA","Release");
+            hBoxStatus.getChildren().add(statuses);
+        });
+        explanationButton.setOnAction(event5->{
+            hBoxExplanation.getChildren().clear();
+            TextArea ta = new TextArea("Modify explanation text");
+            ta.setWrapText(true);
+            hBoxExplanation.getChildren().add(ta);
+        });
         delete.setOnAction(event1 -> {
             gp.getChildren().removeAll(dateRetrieved,name,status,explanation);
             db.delete(((Button)event.getSource()).getText());
             leftBP.getChildren().remove((Button)event.getSource());
             createNewButtons(db.storeDBNames());
-
+            gp.getChildren().removeAll(nameCat,dateCat,statusCat,expCat,hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
         });
-        
+        update.setOnAction(event6 -> {
+            gp.getChildren().removeAll(hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
+
+            leftBP.getChildren().remove((Button)event.getSource());
+            createNewButtons(db.storeDBNames());
+            gp.getChildren().removeAll(nameCat,dateCat,statusCat,expCat,hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
+        });
     };
 
     public void createNewButtons(List<String>buttonName){
@@ -119,6 +143,7 @@ public class Controller{
                 for (int i = 0;i<buttons.size();i++)
                 if(!buttonsList.contains(buttonNames.get(i))) {
                     buttons.add(new Button(buttonNames.get(i)));
+                    buttons.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED,eventHandler);
                 }
         }else if(buttonNames.size()!=buttons.size()){
             for (int i = 0;i<buttonNames.size();i++) {
@@ -136,6 +161,7 @@ public class Controller{
     private void buttonClick(ActionEvent event) {
         gp.getChildren().clear();
         TextArea ta = new TextArea();
+        ta.setWrapText(true);
         Label bugName = new Label("Name:");
         Label bugDate= new Label("Date:");
         Label bugStatus = new Label("Status:");
@@ -176,7 +202,17 @@ public class Controller{
             }catch(NullPointerException | SQLException ex){
                 ex.printStackTrace();
             }
+            gp.getChildren().remove(nameField);
+            gp.getChildren().remove(bugName);
+            gp.getChildren().remove(statuses);
+            gp.getChildren().remove(bugDate);
+            gp.getChildren().remove(bugStatus);
+            gp.getChildren().remove(explain);
+            gp.getChildren().remove(submit);
+            gp.getChildren().remove(datePicker);
+            gp.getChildren().remove(ta);
         });
+
         }
 
 

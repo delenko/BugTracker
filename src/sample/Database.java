@@ -14,7 +14,7 @@ public class Database {
     public Connection openDatabase() throws SQLException {
         String url = "jdbc:mysql://localhost:3306";
         String user = "root";
-        String password = "1qaz!QAZ";
+        String password = "Blakes12!@";
         Connection conn = DriverManager.getConnection(url,user,password);
         return conn;
     }
@@ -69,8 +69,44 @@ public class Database {
         }
         return explanation;
     }
+    public void setName (String name, String nameChange){
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String nameRetrieve = "Update bugs.bugs SET NAME = '"+nameChange+"' where name ='"+name+"'";
+            stmt.executeUpdate(nameRetrieve);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
 
+    };
 
+    public void setDate(String name, String dateChange){
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String dates = "Update bugs.bugs SET date = '"+dateChange+"' where name ='"+name+"'";
+            stmt.executeUpdate(dates);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void setStatus(String name, String statusChange){
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String statuses = "Update bugs.bugs SET status = '"+statusChange+"' where name ='"+name+"'";
+            stmt.executeUpdate(statuses);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void setExplan(String name, String explanChange){
+        try{
+            Statement stmt = openDatabase().createStatement();
+            String explanations = "Update bugs.bugs SET explanation = '"+explanChange+"' where name ='"+name+"'";
+            stmt.executeUpdate(explanations);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public List<String> storeDBNames(){
         List<String> databaseNames = new ArrayList<>();
