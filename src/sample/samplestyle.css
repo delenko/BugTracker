@@ -1,0 +1,64 @@
+.root{
+    -fx-background-color: #474140;
+
+}
+Button{
+    -fx-background-color: #919090;
+    -fx-border-color: black;
+    -fx-background-insets: 2px;
+    -fx-border-radius: 2,2,0,0;
+    -fx-background-radius: 2,2,0,0;
+    -fx-min-height: 25px;
+    -fx-min-width: 62px;
+    -fx-max-height: 25px;
+    -fx-max-width: 62px;
+
+}
+Label{
+    -fx-text-fill: orange;
+    -fx-font-weight: bolder;
+    -fx-label-padding: 2px;
+}
+TextField{
+    -fx-background-color: #919090;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-text-alignment: center;
+    -fx-background-insets: 2px;
+}
+TextArea{
+    -fx-border-color: black;
+    -fx-border-radius: 2px;
+    -fx-background-insets: 2px;
+}
+.text-area .content{
+    -fx-background-color: #919090;
+}
+ComboBox{
+    -fx-background-color: #919090;
+    -fx-border-color: black;
+    -fx-background-insets: 2px;
+}
+.date-picker>.text-field{
+    -fx-background-color: #919090;
+    -fx-border-color: black;
+}
+.date-picker{
+    -fx-border-color: black;
+    -fx-background-insets: 2px;
+}
+GridPane{
+    -fx-background-color: #666363;
+    -fx-background-insets: 1px;
+    -fx-padding: 2px;
+    -fx-border-style: groove;
+}
+VBox{
+    -fx-background-color: #666363;
+    -fx-fill-height: true;
+    -fx-spacing: 2px;
+}
+Scrollbar{
+    -fx-background-color: #666363;
+    -fx-background-insets: 1px;
+}

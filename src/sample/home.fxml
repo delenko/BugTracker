@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="bp" centerShape="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="785.0" scaleShape="false" snapToPixel="false" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 <left>
-    <ScrollPane fx:id="scrollp" prefHeight="460.0" prefWidth="100.0">
-    <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="460.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+    <ScrollPane fx:id="scrollp" fitToWidth="true" prefHeight="460.0" prefWidth="100.0">
+    <VBox fx:id="leftBP" alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="599.0" prefWidth="98.0" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </opaqueInsets>
+         <effect>
+            <InnerShadow />
+         </effect>
+    </VBox>
     </ScrollPane>
 </left>
    <right>
-       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-           <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClick" snapToPixel="false" text="+" textAlignment="CENTER" />
+       <VBox alignment="TOP_CENTER" prefHeight="564.0" prefWidth="71.0" BorderPane.alignment="CENTER">
+           <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" onAction="#buttonClick" prefHeight="25.0" prefWidth="62.0" snapToPixel="false" text="+" textAlignment="CENTER" />
            <Button fx:id="showAll" alignment="CENTER" mnemonicParsing="false" onAction="#showAll" snapToPixel="false" text="Show All" textAlignment="CENTER" />
+         <opaqueInsets>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </opaqueInsets>
        </VBox>
    </right>
    <top>
-      <HBox prefHeight="37.0" prefWidth="803.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="0.0" prefWidth="785.0" BorderPane.alignment="CENTER" />
    </top>
    <center>
-      <GridPane fx:id="gp" prefHeight="616.0" prefWidth="585.0">
+      <GridPane fx:id="gp" prefHeight="616.0" prefWidth="585.0" styleClass=".gp">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="171.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="481.0" minWidth="10.0" prefWidth="414.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="534.0" minWidth="10.0" prefWidth="534.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -31,6 +43,12 @@
             <RowConstraints maxHeight="458.0" minHeight="10.0" prefHeight="426.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="458.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </opaqueInsets>
       </GridPane>
    </center>
 </BorderPane>

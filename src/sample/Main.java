@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader fxml = new FXMLLoader();
         fxml.setController(controller);
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
-
+        root.getStylesheets().add(getClass().getResource("samplestyle.css").toExternalForm());
         primaryStage.setTitle("Bug Tracker");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();

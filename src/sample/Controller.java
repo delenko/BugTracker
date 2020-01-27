@@ -54,13 +54,19 @@ public class Controller{
         Button statusButton = new Button("Modify");
         Button dateButton = new Button("Modify");
         Button explanationButton = new Button("Modify");
+        TextField tf = new TextField("Modify name text");
+        ComboBox<String> statuses = new ComboBox<>();
+        statuses.getItems().addAll("Development","Test","QA","Release");
         expCat.setAlignment(Pos.TOP_LEFT);
+        DatePicker datePicker = new DatePicker();
+        TextArea ta = new TextArea("Modify explanation text");
+        ta.setWrapText(true);
         Button delete = new Button("Delete");
         Button update = new Button("Update");
         HBox hbox = new HBox();
         HBox hboxName = new HBox(10,name,nameButton);
-        HBox hBoxStatus = new HBox(10,dateRetrieved,dateButton);
-        HBox hBoxDate = new HBox(10,status,statusButton);
+        HBox hBoxStatus = new HBox(10,status,statusButton);
+        HBox hBoxDate = new HBox(10,dateRetrieved,dateButton);
         HBox hBoxExplanation = new HBox(5,explanation,explanationButton);
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.getChildren().add(delete);
@@ -78,24 +84,18 @@ public class Controller{
         gp.add(hbox,1,4);
         nameButton.setOnAction(event2->{
             hboxName.getChildren().clear();
-            TextField tf = new TextField("Modify name text");
             hboxName.getChildren().add(tf);
         });
         statusButton.setOnAction(event3->{
-            hBoxDate.getChildren().clear();
-            DatePicker datePicker = new DatePicker();
-            hBoxDate.getChildren().add(datePicker);
+            hBoxStatus.getChildren().clear();
+            hBoxStatus.getChildren().add(statuses);
         });
         dateButton.setOnAction(event4->{
-            hBoxStatus.getChildren().clear();
-            ComboBox<String> statuses = new ComboBox<>();
-            statuses.getItems().addAll("Development","Test","QA","Release");
-            hBoxStatus.getChildren().add(statuses);
+            hBoxDate.getChildren().clear();
+            hBoxDate.getChildren().add(datePicker);
         });
         explanationButton.setOnAction(event5->{
             hBoxExplanation.getChildren().clear();
-            TextArea ta = new TextArea("Modify explanation text");
-            ta.setWrapText(true);
             hBoxExplanation.getChildren().add(ta);
         });
         delete.setOnAction(event1 -> {
@@ -106,9 +106,25 @@ public class Controller{
             gp.getChildren().removeAll(nameCat,dateCat,statusCat,expCat,hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
         });
         update.setOnAction(event6 -> {
-            gp.getChildren().removeAll(hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
+            if(hboxName.getChildren().contains(tf)) {
+                db.setName(name.getText(), tf.getText());
+                leftBP.getChildren().remove((Button) event.getSource());
+                buttons.add(new Button(tf.getText()));
+                leftBP.getChildren().clear();
+                for(Button buttNames : buttons){
+                    leftBP.getChildren().add(buttNames);
+                }
+            }
+            if(hBoxDate.getChildren().contains(datePicker)){
+                LocalDate dateModified = datePicker.getValue();
+                db.setDate(name.getText(),dateModified.toString());
+            }
+            if(hBoxStatus.getChildren().contains(statuses))
+                db.setStatus(name.getText(),statuses.getValue());
+            if(hBoxExplanation.getChildren().contains(ta.getText()))
+                db.setExplan(name.getText(),tf.getText());
 
-            leftBP.getChildren().remove((Button)event.getSource());
+
             createNewButtons(db.storeDBNames());
             gp.getChildren().removeAll(nameCat,dateCat,statusCat,expCat,hboxName,hBoxDate,hBoxExplanation,hBoxStatus);
         });
